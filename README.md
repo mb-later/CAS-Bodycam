@@ -1,5 +1,8 @@
 Discord: https://discord.gg/X8bTK9Stwk
 
+Reqiurements
+https://github.com/utkuali/utk_render
+
 # CAS-Bodycam
 Bodycam Real time video recording script
 ![image](https://github.com/mb-later/CAS-Bodycam/assets/68826839/d784b062-dba8-4095-91cd-f09c988d7486)
