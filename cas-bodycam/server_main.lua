@@ -8,9 +8,6 @@ CreateThread(function()
 end)
 
 
-
-
-
 RegisterServerEvent("getPlayerInfos")
 AddEventHandler("getPlayerInfos", function()
     local player = GetPlayer(source)
@@ -18,7 +15,7 @@ AddEventHandler("getPlayerInfos", function()
     if player then
         infos = {
             name = GetPlayerRName(source),
-            job = GetJob(player).grade_label
+            grade = GetGrade(player)
         }
         TriggerClientEvent("cas-client:updatePlayerInfos", source, infos)
     end
@@ -30,7 +27,7 @@ AddEventHandler("sendToClient", function(_)
     ToPolices()
 end)
 RegisterServerEvent("sendFileData")
-AddEventHandler("sendFileData", function(videoURL, recordName)
+AddEventHandler("sendFileData", function(videoURL, recordName,desc)
     local src = source
     if src == -1 or src == 0 then return end
     if videoURL ~= nil then
@@ -38,7 +35,7 @@ AddEventHandler("sendFileData", function(videoURL, recordName)
             date = os.date("%Y-%m-%d"),
             hms = os.date("%H:%M:%S"),
             recordName = recordName,
-            recordDetails = "Police Department Video Record.",
+            recordDetails = desc,
             recorder = GetPlayerRName(src),
             videoLink = videoURL
         }

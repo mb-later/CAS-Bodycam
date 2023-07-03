@@ -2,8 +2,13 @@
 
 
 CAS = {
-    Framework = "qb",
-    playerLoaded = "QBCore:Client:OnPlayerLoaded",
+    Framework = "esx",
+    playerLoaded = "esx:playerLoaded", -- or QBCore:Client:OnPlayerLoaded
+    Footer = "You can see the records of bodycam in this page.",
+    Header = "LOS SANTOS POLICE DEPARTMENT BODYCAM RECORDS",
+    recordDesc = "Police Department Bodycam Record",
+    recordName = "Police Bodycam Record",
+
     Commands = {
         [1] = {
             command = "records",
@@ -15,15 +20,5 @@ CAS = {
             action = "bodycam",
             desc = "Turn On/Off Bodycam"
         },
-        [3] = {
-            command = "resume",
-            action = "resume",
-            desc = "Resume Record"
-        },
-        [4] = {
-            command = "pause",
-            action = "pause",
-            desc = "Pause Record"
-        }
     }
 }

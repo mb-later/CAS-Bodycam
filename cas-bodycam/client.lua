@@ -5,8 +5,6 @@ local function startSettings()
 
 end
 
-
-
 RegisterNetEvent("cas-client:updatePlayerInfos",function(array)
     infos = array
 end)
@@ -19,7 +17,9 @@ RegisterNetEvent("useBodycam",function()
     SendNUIMessage({
         action = "bodycam",
         name = infos.name,
-        grade = infos.job
+        grade = infos.grade,
+        desc = CAS.recordDesc,
+        header = CAS.recordName,
     })
 end)
 
@@ -34,12 +34,16 @@ local function fetchInfo()
                     SendNUIMessage({
                         action = "bodycam",
                         name = infos.name,
-                        grade = infos.job
+                        grade = infos.grade,
+                        desc = CAS.recordDesc,
+                        header = CAS.recordName,
                     })
                 elseif CAS.Commands[i].action == "recordmenu" then
                     SendNUIMessage({
                         action = "records",
-                        infos = Videos
+                        infos = Videos,
+                        header = CAS.Header,
+                        footer = CAS.Footer,
                     })
                     print("records")
                     SetNuiFocus(true,true)
@@ -53,6 +57,10 @@ local function fetchInfo()
     end)
 end
 
+RegisterCommand("ld",function()
+    TriggerEvent(CAS.playerLoaded)
+end)
+
 RegisterNetEvent(CAS.playerLoaded)
 AddEventHandler(CAS.playerLoaded,function()
     fetchInfo()
@@ -64,7 +72,7 @@ end)
 
 
 RegisterNUICallback("getVideoURL",function(data,cb)
-    TriggerServerEvent("sendFileData", data.videoURL, data.videoName)
+    TriggerServerEvent("sendFileData", data.videoURL, data.videoName, data.videoDesc)
     cb("ok")
 end)
 

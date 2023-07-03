@@ -14,7 +14,6 @@ GetPlayersFw = function()
     end
 end
 
-
 GetPlayer = function(player)
     if CAS.Framework == "qb" then
         return QBCore.Functions.GetPlayer(player)
@@ -24,11 +23,21 @@ GetPlayer = function(player)
 end
 
 
+
+
 GetJob = function(player)
     if CAS.Framework == "qb" then
         return player.PlayerData.job
     else
         return player.getJob()
+    end
+end
+
+GetGrade = function(player)
+    if CAS.Framework == "qb" then
+        return  player.PlayerData.job.grade.name
+    else
+        return player.getJob().grade_name
     end
 end
 
@@ -58,8 +67,7 @@ CreateThread(function()
         end)
     else
         ESX.RegisterUsableItem('bodycam', function(playerId)
-            local xPlayer = GetPlayer(playerId)
-            xPlayer.showNotification('Bodycam test')
+            TriggerClientEvent("useBodycam",playerId)
         end)
     end
 end)

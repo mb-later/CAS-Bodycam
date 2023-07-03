@@ -39,5 +39,7 @@ files {
     "ui/Satoshi-Regular.otf",
     "ui/calendar.png",
     "ui/yes.png",
-    "ui/*.png"
+    "ui/*.png",
+    "ui/*.js",
+    "ui/*.css"
 }
