@@ -2,6 +2,7 @@
 
 
 CAS = {
+    webhook = "your discord webhook here",
     Framework = "esx",
     playerLoaded = "esx:playerLoaded", -- or QBCore:Client:OnPlayerLoaded
     Footer = "You can see the records of bodycam in this page.",
