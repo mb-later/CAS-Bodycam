@@ -1,0 +1,322 @@
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>Cas Dispatch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="cas.js"></script>
+</head>
+
+
+
+<body>
+    <canvas id="videoRec" style="display: none; position: absolute;"></canvas>
+    <div class="bodycam-main" style="display:none;">
+        <div class="bodyBlur"></div>
+        <div class="left-rectbox">
+            <div class="top-designs">
+                <div class="rec-dot">
+                    <div class="into-dot"></div>
+                </div>
+                <div class="rec-text">&nbsp; REC</div>
+            </div>
+            <div class="alt-info-boxesOnBody">
+                <h1 class="bodyHeader">LOS SANTOS POLICE DEPARTMENT</h1>
+                <p class="bodyFooter" id="rcName">Ursu Sane</p>
+                <p class="bodyFooter" id="jobGrade">Los Santos Police Department - Sergeant</p>
+            </div>
+            <div class="bodyInfos">
+                <div class="infoBoxonBody interval">
+                    00.00.00
+                </div>
+                <div class="infoBoxonBody date">
+                    29/06/2023
+                </div>
+            </div>
+        </div>
+        <div class="right-rectbox">
+            <img class="lspdLogo-on" src="lspdlogo.png">
+        </div>
+
+
+    </div>
+    <div class="settings-menu">
+        <div class="whiteblur"></div>
+        <div class="blueblur"></div>
+        <div class="settings-header">
+            <div class="header-left">
+                <div class="left-box">
+                    <img src="recordcalendar.png">
+                </div>
+                <div class="left-text">
+                    RECORD
+                    <br><span style="color: #484848">SETTINGS</span>
+                </div>
+                <div class="close-div">
+                    <button class="close-input">X</button>
+                </div>
+              
+            </div>
+        </div>
+        <div class="settings-body">
+            <div class="settings-box">
+                <div class="input-header">
+                    Record Name <strong style="color: #26C7FA; font-family:Satoshi; font-size: bold;">(MUST BE FILLED)</strong>
+                </div>
+                <div class="input-box">
+                    <input type="text" class="info-input name" placeholder="Gotumu siktiler zor kurtuldum kayıt 1"/>
+                    <img id="yespng" src="close.png">
+                </div>
+            </div>
+            <div class="settings-box">
+                <div class="input-header">
+                    Enter FPS Value <strong style="color: #26C7FA; font-family:Satoshi; font-size: bold;">(24, 30, 50, 60)</strong>
+                </div>
+                <div class="input-box">
+                    <input type="number" class="info-input fps" value="24"/>
+                    <img id="yespng" src="close.png">
+                </div>
+            </div>
+            <div class="settings-box">
+                <div class="input-header">
+                    Description <strong style="color: #26C7FA; font-family:Satoshi; font-size: bold;">(Max 100 Character)</strong>
+                </div>
+                <div class="input-box">
+                    <input type="text" class="info-input desc" placeholder="Store Robbery bodycam save"/>
+                    <img id="yespng" src="close.png">
+                </div>
+            </div>
+            <div class="button-box">
+                <button class="startRecord" id="startRecord" value="start">Start Recording</button>
+            </div>
+        </div>
+    </div>
+    <div class="main-container" style="display: none;">
+        <div class="video-container" style="display: none;">
+            <video id="myVideo" controls>
+                <source src="https://cdn.discordapp.com/attachments/1124438375592636497/1124799389546856588/video.mp4" type="video/mp4">
+            </video>
+        </div>
+        
+        <div class="ellipse-blur"></div>
+        <div class="ellipse-bigBlur"></div>
+        <button class="close-bodycam">
+            <img src="close.png"/>
+        </button>
+        <div class="server-name">Servername, Version 1.0</div>
+        <div class="top-header">
+            <div class="img-box">
+                <img src="https://cdn.discordapp.com/attachments/1103809702212685877/1123994787486384128/image.png">
+            </div>
+            
+            <div class="header-text-box">
+                <h1 class="ls-header">BODYCAM RECORD OF LOS SANTOS</h1>
+                <p class="ls-footer">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+            </div>
+            <div class="date-picker-main">
+                <!-- <button class="dateBtn startNewRecord" value="start">
+                    Start New Record
+                </button> -->
+                
+
+                <div class="date-arrow-btn-div">
+                    <button class="dateBtn arrowBtn leftBtn">
+                        <img src="chevron-left.png"></img>
+                    </button>
+                   <input type="text" class="datepickerBtn" placeholder="Filter Date">
+                    <button class="dateBtn arrowBtn rightBtn">
+                        <img src="chevron-right.png"></img>
+                    </button>
+                </div>
+       
+            </div>
+        </div>
+        <div class="records-main">
+            <div class="recordBox">
+                <div class="img-pick">
+                    <img class="record-calimg" src="recordcalendar.png">
+                </div>
+                <div class="record-info-box">
+                    <h1 class="record-headText">
+                        Record Name | 20 Jaunary 2023 | 12.22 PM
+                    </h1>
+                    <p class="record-footText">
+                        Record details buraya açıklama falannn.
+                    </p>
+                </div>
+                <div class="recorder-name">
+                    <img src="key.png">
+                    Ursu Sane
+                </div>
+                <div class="action-div">
+                    <button class="plyRec">Play Record</button>
+                </div>
+            </div>
+            <div class="recordBox">
+                <div class="img-pick">
+                    <img class="record-calimg" src="recordcalendar.png">
+                </div>
+                <div class="record-info-box">
+                    <h1 class="record-headText">
+                        Record Name | 20 Jaunary 2023 | 12.22 PM
+                    </h1>
+                    <p class="record-footText">
+                        Record details buraya açıklama falannn.
+                    </p>
+                </div>
+                <div class="recorder-name">
+                    <img src="key.png">
+                    Ursu Sane
+                </div>
+                <div class="action-div">
+                    <button class="plyRec">Play Record</button>
+                </div>
+            </div>
+            <div class="recordBox">
+                <div class="img-pick">
+                    <img class="record-calimg" src="recordcalendar.png">
+                </div>
+                <div class="record-info-box">
+                    <h1 class="record-headText">
+                        Record Name | 20 Jaunary 2023 | 12.22 PM
+                    </h1>
+                    <p class="record-footText">
+                        Record details buraya açıklama falannn.
+                    </p>
+                </div>
+                <div class="recorder-name">
+                    <img src="key.png">
+                    Ursu Sane
+                </div>
+                <div class="action-div">
+                    <button class="plyRec">Play Record</button>
+                </div>
+            </div>
+            <div class="recordBox">
+                <div class="img-pick">
+                    <img class="record-calimg" src="recordcalendar.png">
+                </div>
+                <div class="record-info-box">
+                    <h1 class="record-headText">
+                        Record Name | 20 Jaunary 2023 | 12.22 PM
+                    </h1>
+                    <p class="record-footText">
+                        Record details buraya açıklama falannn.
+                    </p>
+                </div>
+                <div class="recorder-name">
+                    <img src="key.png">
+                    Ursu Sane
+                </div>
+                <div class="action-div">
+                    <button class="plyRec">Play Record</button>
+                </div>
+            </div>
+            <div class="recordBox">
+                <div class="img-pick">
+                    <img class="record-calimg" src="recordcalendar.png">
+                </div>
+                <div class="record-info-box">
+                    <h1 class="record-headText">
+                        Record Name | 20 Jaunary 2023 | 12.22 PM
+                    </h1>
+                    <p class="record-footText">
+                        Record details buraya açıklama falannn.
+                    </p>
+                </div>
+                <div class="recorder-name">
+                    <img src="key.png">
+                    Ursu Sane
+                </div>
+                <div class="action-div">
+                    <button class="plyRec">Play Record</button>
+                </div>
+            </div>
+            <div class="recordBox">
+                <div class="img-pick">
+                    <img class="record-calimg" src="recordcalendar.png">
+                </div>
+                <div class="record-info-box">
+                    <h1 class="record-headText">
+                        Record Name | 20 Jaunary 2023 | 12.22 PM
+                    </h1>
+                    <p class="record-footText">
+                        Record details buraya açıklama falannn.
+                    </p>
+                </div>
+                <div class="recorder-name">
+                    <img src="key.png">
+                    Ursu Sane
+                </div>
+                <div class="action-div">
+                    <button class="plyRec">Play Record</button>
+                </div>
+            </div>
+            <div class="recordBox">
+                <div class="img-pick">
+                    <img class="record-calimg" src="recordcalendar.png">
+                </div>
+                <div class="record-info-box">
+                    <h1 class="record-headText">
+                        Record Name | 20 Jaunary 2023 | 12.22 PM
+                    </h1>
+                    <p class="record-footText">
+                        Record details buraya açıklama falannn.
+                    </p>
+                </div>
+                <div class="recorder-name">
+                    <img src="key.png">
+                    Ursu Sane
+                </div>
+                <div class="action-div">
+                    <button class="plyRec">Play Record</button>
+                </div>
+            </div>
+            <div class="recordBox">
+                <div class="img-pick">
+                    <img class="record-calimg" src="recordcalendar.png">
+                </div>
+                <div class="record-info-box">
+                    <h1 class="record-headText">
+                        Record Name | 20 Jaunary 2023 | 12.22 PM
+                    </h1>
+                    <p class="record-footText">
+                        Record details buraya açıklama falannn.
+                    </p>
+                </div>
+                <div class="recorder-name">
+                    <img src="key.png">
+                    Ursu Sane
+                </div>
+                <div class="action-div">
+                    <button class="plyRec">Play Record</button>
+                </div>
+            </div>
+            
+            <div class="recordBox">
+                <div class="img-pick">
+                    <img class="record-calimg" src="recordcalendar.png">
+                </div>
+                <div class="record-info-box">
+                    <h1 class="record-headText">
+                        Record Name | 20 Jaunary 2023 | 12.22 PM
+                    </h1>
+                    <p class="record-footText">
+                        Record details buraya açıklama falannn.
+                    </p>
+                </div>
+                <div class="recorder-name">
+                    <img src="key.png">
+                    Ursu Sane
+                </div>
+                <div class="action-div">
+                    <button class="plyRec">Play Record</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="nui://utk_render/script.js"></script>
+</body>
