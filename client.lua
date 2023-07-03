@@ -20,6 +20,7 @@ RegisterNetEvent("useBodycam",function()
         grade = infos.grade,
         desc = CAS.recordDesc,
         header = CAS.recordName,
+        webhook = CAS.webhook
     })
 end)
 
@@ -37,6 +38,7 @@ local function fetchInfo()
                         grade = infos.grade,
                         desc = CAS.recordDesc,
                         header = CAS.recordName,
+                        webhook = CAS.webhook
                     })
                 elseif CAS.Commands[i].action == "recordmenu" then
                     SendNUIMessage({
