@@ -7,27 +7,41 @@ CreateThread(function()
     end
 end)
 
-
-RegisterServerEvent("getPlayerInfos")
-AddEventHandler("getPlayerInfos", function()
-    local player = GetPlayer(source)
-    infos = {}
-    if player then
-        infos = {
-            name = GetPlayerRName(source),
-            grade = GetGrade(player)
-        }
-        TriggerClientEvent("cas-client:updatePlayerInfos", source, infos)
+RegisterCommand("records",function(playerId)
+    print("used records")
+    if playerId then
+        if not Videos then
+            Videos = {}
+        end
+        local player = GetPlayer(playerId)
+        if not player then return end
+        local jobCheck = (GetJob(player).name == CAS.allowedJob)
+        if not jobCheck then return end
+        TriggerClientEvent("cas-bodycam:action",playerId, "records", Videos)
     end
 end)
 
 
-RegisterServerEvent("sendToClient")
-AddEventHandler("sendToClient", function(_)
-    ToPolices()
+RegisterCommand("bodycam",function(playerId)
+    local info = {}
+    if playerId then
+        local player = GetPlayer(playerId)
+        if player then
+            local jobCheck = (GetJob(player).name == CAS.allowedJob)
+            if not jobCheck then return end
+            info = {
+                name = GetPlayerRName(playerId),
+                grade = GetGrade(player)
+            }
+            TriggerClientEvent("cas-bodycam:action", playerId, "bodycam", info)
+        end
+    end
 end)
+
+
+
 RegisterServerEvent("sendFileData")
-AddEventHandler("sendFileData", function(videoURL, recordName,desc)
+AddEventHandler("sendFileData", function(videoURL, recordName, videoDesc)
     local src = source
     if src == -1 or src == 0 then return end
     if videoURL ~= nil then
@@ -35,25 +49,48 @@ AddEventHandler("sendFileData", function(videoURL, recordName,desc)
             date = os.date("%Y-%m-%d"),
             hms = os.date("%H:%M:%S"),
             recordName = recordName,
-            recordDetails = desc,
+            recordDetails = videoDesc,
             recorder = GetPlayerRName(src),
             videoLink = videoURL
         }
         Videos[recordName] = newVideo
     end
-    ToPolices()
     SaveResourceFile(GetCurrentResourceName(), "/videopatch.json", json.encode(Videos), -1)
 end)
 
 
-ToPolices = function()
-    local players = GetPlayersFw()
-    for i = 1, #players do
-        local player = GetPlayer(players[i])
-        print(GetJob(player).name)
-        if GetJob(player).name == "police" then
-            TriggerClientEvent("cas-client:updateVideos", GetSource(player), Videos)
-        end
-    end
-end
+
+
+
+-- RegisterServerEvent("getPlayerInfos")
+-- AddEventHandler("getPlayerInfos", function()
+--     local player = GetPlayer(source)
+--     infos = {}
+--     if player then
+--         infos = {
+--             name = GetPlayerRName(source),
+--             job = GetJob(player).grade.label
+--         }
+--         TriggerClientEvent("cas-client:updatePlayerInfos", source, infos)
+--     end
+-- end)
+
+
+-- RegisterServerEvent("sendToClient")
+-- AddEventHandler("sendToClient", function(_)
+--     ToPolices()
+-- end)
+
+
+
+-- ToPolices = function()
+--     local players = GetPlayersFw()
+--     for i = 1, #players do
+--         local player = GetPlayer(players[i])
+--         print(GetJob(player).name)
+--         if GetJob(player).name == "police" then
+--             TriggerClientEvent("cas-client:updateVideos", GetSource(player), Videos)
+--         end
+--     end
+-- end
 
