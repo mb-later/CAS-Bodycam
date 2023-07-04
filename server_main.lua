@@ -7,8 +7,25 @@ CreateThread(function()
     end
 end)
 
+local function getItem(source)
+    local src = source
+    if src == 0 then return end
+    local player = GetPlayer(src)
+    if not player then return end
+    if CAS.Framework == "qb" then
+        local item = player.Functions.GetItemByName('bodycam')
+        if not item then return end
+        return true
+    else
+        local item = player.getInventoryItem("bodycam")
+        if not item then return end
+        return true
+    end
+    return false
+end
+
+
 RegisterCommand("records",function(playerId)
-    print("used records")
     if playerId then
         if not Videos then
             Videos = {}
@@ -33,11 +50,12 @@ RegisterCommand("bodycam",function(playerId)
                 name = GetPlayerRName(playerId),
                 grade = GetGrade(player)
             }
+            local itemCheck = getItem(playerId)
+            if not itemCheck then return end
             TriggerClientEvent("cas-bodycam:action", playerId, "bodycam", info)
         end
     end
 end)
-
 
 
 RegisterServerEvent("sendFileData")
