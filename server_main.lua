@@ -71,11 +71,10 @@ AddEventHandler("sendFileData", function(videoURL, recordName, videoDesc)
             recorder = GetPlayerRName(src),
             videoLink = videoURL
         }
-        Videos[recordName] = newVideo
+        table.insert(Videos, newVideo)
     end
     SaveResourceFile(GetCurrentResourceName(), "/videopatch.json", json.encode(Videos), -1)
 end)
-
 
 
 
