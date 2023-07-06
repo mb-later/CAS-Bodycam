@@ -32,30 +32,56 @@ RegisterCommand("records",function(playerId)
         end
         local player = GetPlayer(playerId)
         if not player then return end
-        local jobCheck = (GetJob(player).name == CAS.allowedJob)
-        if not jobCheck then return end
+        local job = GetJob(player).name
+        local jobCheck = false
+        for _, allowedJob in ipairs(CAS.allowedJob) do
+            if job == allowedJob then
+                jobCheck = true
+                break
+            end
+        end
+        if not jobCheck then
+            Notify(playerId, "You are not a police or sheriff")
+            return
+        end
         TriggerClientEvent("cas-bodycam:action",playerId, "records", Videos)
     end
 end)
 
 
-RegisterCommand("bodycam",function(playerId)
+RegisterCommand("bodycam", function(playerId)
     local info = {}
     if playerId then
         local player = GetPlayer(playerId)
         if player then
-            local jobCheck = (GetJob(player).name == CAS.allowedJob)
-            if not jobCheck then Notify(playerId, "You are not a police") return end
+            local job = GetJob(player).name
+            local jobCheck = false
+            for _, allowedJob in ipairs(CAS.allowedJob) do
+                if job == allowedJob then
+                    jobCheck = true
+                    break
+                end
+            end
+            if not jobCheck then
+                Notify(playerId, "You are not a police or sheriff")
+                return
+            end
+            
             info = {
                 name = GetPlayerRName(playerId),
                 grade = GetGrade(player)
             }
             local itemCheck = getItem(playerId)
-            if not itemCheck then Notify(playerId, "You don't have a bodycam.") return end
+            if not itemCheck then
+                Notify(playerId, "You don't have a bodycam.")
+                return
+            end
             TriggerClientEvent("cas-bodycam:action", playerId, "bodycam", info)
+            
         end
     end
 end)
+
 
 
 RegisterServerEvent("sendFileData")
