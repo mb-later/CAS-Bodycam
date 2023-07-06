@@ -45,7 +45,7 @@ RegisterCommand("bodycam",function(playerId)
         local player = GetPlayer(playerId)
         if player then
             local jobCheck = (GetJob(player).name == CAS.allowedJob)
-            if not jobCheck then Notify("You are not a police") return end
+            if not jobCheck then Notify(playerId, "You are not a police") return end
             info = {
                 name = GetPlayerRName(playerId),
                 grade = GetGrade(player)
