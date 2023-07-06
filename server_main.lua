@@ -45,13 +45,13 @@ RegisterCommand("bodycam",function(playerId)
         local player = GetPlayer(playerId)
         if player then
             local jobCheck = (GetJob(player).name == CAS.allowedJob)
-            if not jobCheck then return end
+            if not jobCheck then Notify("You are not a police") return end
             info = {
                 name = GetPlayerRName(playerId),
                 grade = GetGrade(player)
             }
             local itemCheck = getItem(playerId)
-            if not itemCheck then return end
+            if not itemCheck then Notify(playerId, "You don't have a bodycam.") return end
             TriggerClientEvent("cas-bodycam:action", playerId, "bodycam", info)
         end
     end

@@ -71,3 +71,11 @@ CreateThread(function()
         end)
     end
 end)
+Notify = function (src,text)
+    if CAS.Framework == "qb" then
+        return TriggerClientEvent("QBCore:Notify", src, text)
+    else
+        local xPlayer = GetPlayer(src)
+        return xPlayer.showNotification(text)
+    end
+end
