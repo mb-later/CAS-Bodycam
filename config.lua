@@ -2,8 +2,8 @@
 
 
 CAS = {
-    allowedJob = "police",
-    webhook = "https://discord.com/api/webhooks/1124438446816116948/1m80acXtfAO2XXgLhax0h8Y3OqpJg6qSHguNWw7lkyWpMtgrf83AiCGx-Hkpelf03eWD",
+    allowedJob = { 'police', 'sheriff' },
+    webhook = "https://discord.com/api/webhooks/1124438446816116948/1m80acXtfAO2asdXXgLhax0h8Y3OqpJg6qSHguNWw7lkyWpMtgrf83AiCGx-Hkpelf03eWD",
     Framework = "qb",
     Footer = "You can see the records of bodycam in this page.",
     Header = "LOS SANTOS POLICE DEPARTMENT BODYCAM RECORDS",
