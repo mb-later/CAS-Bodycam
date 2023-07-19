@@ -16,9 +16,11 @@ client_scripts {
 
 
 server_scripts {
-    "server_main.lua",
     "config.lua",
     "server_hook.lua",
+    "server_main.lua",
+
+
     "videopatch.json",
 
 }
